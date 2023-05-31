@@ -43,7 +43,6 @@
 #if (GMSL_CAMERA_NUM >= 4)
 #define GMSL_CAMERA_4
 #endif
-#define GMSL_VC
 
 #ifdef GMSL_DESER_MAX9296A
 #define GMSL_PHY 0x1
@@ -71,9 +70,7 @@
 				reg = <0>;
 
 				vi_in0: endpoint {
-#if defined(GMSL_VC)
 					vc-id = <0>;
-#endif
 					port-index = <GMSL_PORT>;
 					bus-width = <2>;
 					remote-endpoint = <&csi_out0>;
@@ -85,9 +82,7 @@
 				reg = <1>;
 
 				vi_in1: endpoint {
-#if defined(GMSL_VC)
 					vc-id = <1>;
-#endif
 					port-index = <GMSL_PORT>;
 					bus-width = <2>;
 					remote-endpoint = <&csi_out1>;
@@ -100,9 +95,7 @@
 				reg = <2>;
 
 				vi_in2: endpoint {
-#if defined(GMSL_VC)
 					vc-id = <2>;
-#endif
 					port-index = <GMSL_PORT>;
 					bus-width = <2>;
 					remote-endpoint = <&csi_out2>;
@@ -115,9 +108,7 @@
 				reg = <3>;
 
 				vi_in3: endpoint {
-#if defined(GMSL_VC)
 					vc-id = <3>;
-#endif
 					port-index = <GMSL_PORT>;
 					bus-width = <2>;
 					remote-endpoint = <&csi_out3>;
