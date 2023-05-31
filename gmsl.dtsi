@@ -45,14 +45,14 @@
 #endif
 
 #ifdef GMSL_DESER_MAX9296A
-#define GMSL_PHY 0x1
+#define GMSL_PHY		0x1
 #else
-#define GMSL_PHY 0x2
+#define GMSL_PHY		0x2
 #endif
-#define GMSL_PORT	0x0
-#define GMSL_MIPI_DT 0x2c
-#define GMSL_MIPI_DT_FS 0x0
-#define GMSL_MIPI_DT_FE 0x1
+#define GMSL_PORT		0x0
+#define GMSL_MIPI_DT		0x2c
+#define GMSL_MIPI_DT_FS		0x0
+#define GMSL_MIPI_DT_FE		0x1
 
 #define GMSL_CHANGE_I2C_ADDR
 #define GMSL_SER_0_MAX9295A
