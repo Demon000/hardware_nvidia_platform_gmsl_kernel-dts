@@ -126,21 +126,21 @@
 			#size-cells = <0>;
 
 			#define NVCSI_CH_INDEX 0
-			#include "tegra194-camera-gmsl-nvcsi-channel.dtsi"
+			#include "gmsl-nvcsi-channel.dtsi"
 
 #if defined(GMSL_CAMERA_2)
 			#define NVCSI_CH_INDEX 1
-			#include "tegra194-camera-gmsl-nvcsi-channel.dtsi"
+			#include "gmsl-nvcsi-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_3)
 			#define NVCSI_CH_INDEX 2
-			#include "tegra194-camera-gmsl-nvcsi-channel.dtsi"
+			#include "gmsl-nvcsi-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_4)
 			#define NVCSI_CH_INDEX 3
-			#include "tegra194-camera-gmsl-nvcsi-channel.dtsi"
+			#include "gmsl-nvcsi-channel.dtsi"
 #endif
 		};
 	};
@@ -173,13 +173,13 @@
 						#ifdef GMSL_SER_0_MAX9295A
 						#define SER_COMPAT "maxim,max9295a"
 						#endif
-						#include "tegra194-camera-gmsl-serializer.dtsi"
+						#include "gmsl-serializer.dtsi"
 
 						#define OX03A_INDEX 0
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define OX03A_HEX_REG 0x37
 						#endif
-						#include "tegra194-camera-gmsl-ox03a.dtsi"
+						#include "gmsl-ox03a.dtsi"
 					};
 
 #if defined(GMSL_CAMERA_2)
@@ -193,13 +193,13 @@
 						#ifdef GMSL_SER_1_MAX9295A
 						#define SER_COMPAT "maxim,max9295a"
 						#endif
-						#include "tegra194-camera-gmsl-serializer.dtsi"
+						#include "gmsl-serializer.dtsi"
 
 						#define OX03A_INDEX 1
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define OX03A_HEX_REG 0x38
 						#endif
-						#include "tegra194-camera-gmsl-ox03a.dtsi"
+						#include "gmsl-ox03a.dtsi"
 					};
 #endif
 
@@ -211,13 +211,13 @@
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x43
 						#endif
-						#include "tegra194-camera-gmsl-serializer.dtsi"
+						#include "gmsl-serializer.dtsi"
 
 						#define OX03A_INDEX 2
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define OX03A_HEX_REG 0x39
 						#endif
-						#include "tegra194-camera-gmsl-ox03a.dtsi"
+						#include "gmsl-ox03a.dtsi"
 					};
 #endif
 
@@ -229,13 +229,13 @@
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x44
 						#endif
-						#include "tegra194-camera-gmsl-serializer.dtsi"
+						#include "gmsl-serializer.dtsi"
 
 						#define OX03A_INDEX 3
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define OX03A_HEX_REG 0x3a
 						#endif
-						#include "tegra194-camera-gmsl-ox03a.dtsi"
+						#include "gmsl-ox03a.dtsi"
 					};
 #endif
 				};
@@ -247,7 +247,7 @@
 				#define DESER_CH_SRC_I2C_REG 0x36
 				#define DESER_CH_DST_I2C_REG 0x37
 				#endif
-				#include "tegra194-camera-gmsl-deserializer-channel.dtsi"
+				#include "gmsl-deserializer-channel.dtsi"
 
 #if defined(GMSL_CAMERA_2)
 				#define DESER_CH_INDEX 1
@@ -257,7 +257,7 @@
 				#define DESER_CH_SRC_I2C_REG 0x36
 				#define DESER_CH_DST_I2C_REG 0x38
 				#endif
-				#include "tegra194-camera-gmsl-deserializer-channel.dtsi"
+				#include "gmsl-deserializer-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_3)
@@ -268,7 +268,7 @@
 				#define DESER_CH_SRC_I2C_REG 0x36
 				#define DESER_CH_DST_I2C_REG 0x39
 				#endif
-				#include "tegra194-camera-gmsl-deserializer-channel.dtsi"
+				#include "gmsl-deserializer-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_4)
@@ -279,7 +279,7 @@
 				#define DESER_CH_SRC_I2C_REG 0x36
 				#define DESER_CH_DST_I2C_REG 0x3a
 				#endif
-				#include "tegra194-camera-gmsl-deserializer-channel.dtsi"
+				#include "gmsl-deserializer-channel.dtsi"
 #endif
 			};
 	};
