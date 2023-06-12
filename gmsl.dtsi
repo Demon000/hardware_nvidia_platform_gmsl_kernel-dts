@@ -16,6 +16,10 @@
  */
 #include <dt-bindings/media/camera.h>
 
+// #define GMSL_USE_I2C_BUS_1
+// #define GMSL_USE_I2C_BUS_8
+// #define GMSL_USE_I2C_MUX
+
 #define _CONCAT(a, b) a ## b
 #define CONCAT(a, b) _CONCAT(a, b)
 
@@ -59,6 +63,19 @@
 #define GMSL_SER_1_MAX9295A
 
 / {
+	aliases {
+		i2c1000 = &deserializer_i2cmux_0;
+#if defined(GMSL_CAMERA_2)
+		i2c1001 = &deserializer_i2cmux_1;
+#endif
+#if defined(GMSL_CAMERA_3)
+		i2c1002 = &deserializer_i2cmux_2;
+#endif
+#if defined(GMSL_CAMERA_4)
+		i2c1003 = &deserializer_i2cmux_3;
+#endif
+	};
+
 	tegra-capture-vi  {
 		num-channels = <GMSL_CAMERA_NUM>;
 
@@ -145,7 +162,16 @@
 		};
 	};
 
+#if defined(GMSL_USE_I2C_BUS_1)
 	i2c@c240000 {
+#elif defined(GMSL_USE_I2C_BUS_8)
+	i2c@c250000 {
+#elif !defined(GMSL_USE_I2C_MUX)
+	i2c@3180000 {
+#else
+	cam_i2cmux {
+		i2c@0 {
+#endif
 			#ifdef GMSL_DESER_MAX9296A
 			gmsl-deserializer@48 {
 			#else
@@ -163,7 +189,7 @@
 				#endif
 
 				i2c-mux {
-					i2c@0 {
+					deserializer_i2cmux_0: i2c@0 {
 						reg = <0>;
 
 						#define SER_INDEX 0
@@ -183,7 +209,7 @@
 					};
 
 #if defined(GMSL_CAMERA_2)
-					i2c@1 {
+					deserializer_i2cmux_1: i2c@1 {
 						reg = <1>;
 
 						#define SER_INDEX 1
@@ -204,7 +230,7 @@
 #endif
 
 #if defined(GMSL_CAMERA_3)
-					i2c@2 {
+					deserializer_i2cmux_2: i2c@2 {
 						reg = <2>;
 
 						#define SER_INDEX 2
@@ -222,7 +248,7 @@
 #endif
 
 #if defined(GMSL_CAMERA_4)
-					i2c@3 {
+					deserializer_i2cmux_3: i2c@3 {
 						reg = <3>;
 
 						#define SER_INDEX 3
@@ -282,6 +308,9 @@
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
 			};
+#if !defined(GMSL_USE_I2C_BUS_1) && !defined(GMSL_USE_I2C_BUS_8) && defined(GMSL_USE_I2C_MUX)
+		};
+#endif
 	};
 };
 / {
@@ -338,8 +367,14 @@
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 9-0036";
+					devname = "ox03a 1000-0036";
+#if defined(GMSL_USE_I2C_BUS_1)
 					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
+#elif defined(GMSL_USE_I2C_BUS_8)
+					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
+#else
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
+#endif
 				};
 			};
 
@@ -350,8 +385,14 @@
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 10-0036";
+					devname = "ox03a 1001-0036";
+#if defined(GMSL_USE_I2C_BUS_1)
 					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
+#elif defined(GMSL_USE_I2C_BUS_8)
+					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
+#else
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
+#endif
 				};
 			};
 #endif
@@ -363,8 +404,14 @@
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 11-0036";
+					devname = "ox03a 1002-0036";
+#if defined(GMSL_USE_I2C_BUS_1)
 					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
+#elif defined(GMSL_USE_I2C_BUS_8)
+					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
+#else
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
+#endif
 				};
 			};
 #endif
@@ -376,8 +423,14 @@
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 12-0036";
+					devname = "ox03a 1003-0036";
+#if defined(GMSL_USE_I2C_BUS_1)
 					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@3/ox03a@36";
+#elif defined(GMSL_USE_I2C_BUS_8)
+					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
+#else
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@3/ox03a@36";
+#endif
 				};
 			};
 #endif
