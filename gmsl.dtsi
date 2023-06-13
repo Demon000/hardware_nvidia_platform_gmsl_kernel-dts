@@ -26,9 +26,12 @@
 #define _STRINGIFY(a) # a
 #define STRINGIFY(a) _STRINGIFY(a)
 
-#define GMSL_CAMERA_NUM	3
+#define GMSL_CAMERA_NUM	4
 
-#define GMSL_DESER_MAX9296A
+// #define GMSL_DESER_MAX9296A
+#define GMSL_CHANGE_I2C_ADDR
+// #define GMSL_SER_0_MAX9295A
+// #define GMSL_SER_1_MAX9295A
 
 #ifdef GMSL_DESER_MAX9296A
 #if GMSL_CAMERA_NUM > 2
@@ -57,10 +60,6 @@
 #define GMSL_MIPI_DT		0x2c
 #define GMSL_MIPI_DT_FS		0x0
 #define GMSL_MIPI_DT_FE		0x1
-
-#define GMSL_CHANGE_I2C_ADDR
-#define GMSL_SER_0_MAX9295A
-#define GMSL_SER_1_MAX9295A
 
 / {
 	aliases {
