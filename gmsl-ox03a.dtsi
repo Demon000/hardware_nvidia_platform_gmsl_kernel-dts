@@ -46,6 +46,9 @@ ox03a@OX03A_HEX_REG {
 		discontinuous_clk = "no";
 		dpcm_enable = "false";
 		cil_settletime = "0";
+#ifdef GMSL_LANE_POLARITY_SWAP
+		lane_polarity = "6";
+#endif
 
 		active_w = "1920";
 		active_h = "1280";

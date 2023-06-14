@@ -19,6 +19,7 @@
 // #define GMSL_USE_I2C_BUS_1
 // #define GMSL_USE_I2C_BUS_8
 // #define GMSL_USE_I2C_MUX
+// #define GMSL_LANE_POLARITY_SWAP
 
 #define _CONCAT(a, b) a ## b
 #define CONCAT(a, b) _CONCAT(a, b)
