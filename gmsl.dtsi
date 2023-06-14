@@ -20,6 +20,7 @@
 // #define GMSL_USE_I2C_BUS_8
 // #define GMSL_USE_I2C_MUX
 // #define GMSL_LANE_POLARITY_SWAP
+// #define GMSL_USE_PORT_1
 
 #define _CONCAT(a, b) a ## b
 #define CONCAT(a, b) _CONCAT(a, b)
@@ -57,7 +58,15 @@
 #else
 #define GMSL_PHY		0x2
 #endif
+
+#if defined(GMSL_USE_PORT_1)
+#define GMSL_PORT		0x1
+#define GMSL_PORT_SERIAL	"serial_b"
+#else
 #define GMSL_PORT		0x0
+#define GMSL_PORT_SERIAL	"serial_a"
+#endif
+
 #define GMSL_MIPI_DT		0x2c
 #define GMSL_MIPI_DT_FS		0x0
 #define GMSL_MIPI_DT_FE		0x1

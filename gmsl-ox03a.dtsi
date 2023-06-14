@@ -43,7 +43,7 @@ ox03a@OX03A_HEX_REG {
 	mode0 {
 		mclk_khz = "25000";
 		num_lanes = "2";
-		tegra_sinterface = "serial_a";
+		tegra_sinterface = GMSL_PORT_SERIAL;
 		vc_id = STRINGIFY(OX03A_VC_ID);
 		phy_mode = "DPHY";
 		discontinuous_clk = "no";
@@ -92,7 +92,7 @@ ox03a@OX03A_HEX_REG {
 			reg = <0>;
 
 			OX03A_OUT_LABEL: endpoint {
-				port-index = <0>;
+				port-index = <GMSL_PORT>;
 				bus-width = <4>;
 				data-lanes = <1 2 3 4>;
 				remote-endpoint = <&OX03A_IN_LABEL>;
