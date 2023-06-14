@@ -177,6 +177,9 @@
 			#else
 			gmsl-deserializer@27 {
 			#endif
+				#address-cells = <1>;
+				#size-cells = <0>;
+
 				#ifdef GMSL_DESER_MAX9296A
 				compatible = "maxim,max9296a";
 				#else
@@ -189,7 +192,13 @@
 				#endif
 
 				i2c-mux {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
 					deserializer_i2cmux_0: i2c@0 {
+						#address-cells = <1>;
+						#size-cells = <0>;
+
 						reg = <0>;
 
 						#define SER_INDEX 0
@@ -210,6 +219,9 @@
 
 #if defined(GMSL_CAMERA_2)
 					deserializer_i2cmux_1: i2c@1 {
+						#address-cells = <1>;
+						#size-cells = <0>;
+
 						reg = <1>;
 
 						#define SER_INDEX 1
@@ -231,6 +243,9 @@
 
 #if defined(GMSL_CAMERA_3)
 					deserializer_i2cmux_2: i2c@2 {
+						#address-cells = <1>;
+						#size-cells = <0>;
+
 						reg = <2>;
 
 						#define SER_INDEX 2
@@ -249,6 +264,9 @@
 
 #if defined(GMSL_CAMERA_4)
 					deserializer_i2cmux_3: i2c@3 {
+						#address-cells = <1>;
+						#size-cells = <0>;
+
 						reg = <3>;
 
 						#define SER_INDEX 3

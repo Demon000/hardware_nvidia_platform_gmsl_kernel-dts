@@ -23,6 +23,9 @@
 #endif
 
 ox03a@OX03A_HEX_REG {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
 	compatible = "ov,ox03a";
 	reg = <OX03A_HEX_REG>;
 
@@ -87,6 +90,7 @@ ox03a@OX03A_HEX_REG {
 		#size-cells = <0>;
 		port@0 {
 			reg = <0>;
+
 			OX03A_OUT_LABEL: endpoint {
 				port-index = <0>;
 				bus-width = <4>;

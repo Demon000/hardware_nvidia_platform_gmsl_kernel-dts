@@ -42,7 +42,7 @@ channel@NVCSI_CH_REG {
 		port@0 {
 			reg = <0>;
 
-			NVCSI_CH_IN_LABEL: endpoint@0 {
+			NVCSI_CH_IN_LABEL: endpoint {
 				remote-endpoint = <&NVCSI_CH_IN_REMOTE_LABEL>;
 				port-index = <GMSL_PORT>;
 				bus-width = <2>;
@@ -54,7 +54,7 @@ channel@NVCSI_CH_REG {
 		port@1 {
 			reg = <1>;
 
-			NVCSI_CH_OUT_LABEL: endpoint@1 {
+			NVCSI_CH_OUT_LABEL: endpoint {
 				remote-endpoint = <&NVCSI_CH_OUT_REMOTE_LABEL>;
 			};
 		};

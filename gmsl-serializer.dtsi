@@ -30,6 +30,9 @@
 #endif
 
 gmsl-serializer@SER_HEX_REG {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
 	compatible = SER_COMPAT;
 	reg = <SER_HEX_REG>;
 
