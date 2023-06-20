@@ -36,6 +36,25 @@ gmsl-serializer@SER_HEX_REG {
 	compatible = SER_COMPAT;
 	reg = <SER_HEX_REG>;
 
+#if (defined(SER_CH_SRC_I2C_0_REG) && defined(SER_CH_DST_I2C_0_REG)) || \
+    (defined(SER_CH_SRC_I2C_1_REG) && defined(SER_CH_DST_I2C_1_REG))
+
+#if !defined(SER_CH_SRC_I2C_0_REG) && !defined(SER_CH_DST_I2C_0_REG)
+#define SER_CH_SRC_I2C_0_REG
+#define SER_CH_DST_I2C_0_REG
+#endif
+
+#if !defined(SER_CH_SRC_I2C_1_REG) && !defined(SER_CH_DST_I2C_1_REG)
+#define SER_CH_SRC_I2C_1_REG
+#define SER_CH_DST_I2C_1_REG
+#endif
+
+	max,i2c-addr-translate = <
+		SER_CH_SRC_I2C_0_REG SER_CH_DST_I2C_0_REG
+		SER_CH_SRC_I2C_1_REG SER_CH_DST_I2C_1_REG
+	>;
+#endif
+
 	pipe@0 {
 		reg = <0>;
 
@@ -72,6 +91,10 @@ gmsl-serializer@SER_HEX_REG {
 	};
 };
 
+#undef SER_CH_SRC_I2C_0_REG
+#undef SER_CH_DST_I2C_0_REG
+#undef SER_CH_SRC_I2C_1_REG
+#undef SER_CH_DST_I2C_1_REG
 #undef SER_COMPAT
 #undef SER_HEX_REG
 #undef SER_INDEX

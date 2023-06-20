@@ -217,6 +217,8 @@
 						#define SER_INDEX 0
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x41
+						#define SER_CH_SRC_I2C_0_REG 0x37
+						#define SER_CH_DST_I2C_0_REG 0x36
 						#endif
 						#ifdef GMSL_SER_0_MAX9295A
 						#define SER_COMPAT "maxim,max9295a"
@@ -240,6 +242,8 @@
 						#define SER_INDEX 1
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x42
+						#define SER_CH_SRC_I2C_0_REG 0x38
+						#define SER_CH_DST_I2C_0_REG 0x36
 						#endif
 						#ifdef GMSL_SER_1_MAX9295A
 						#define SER_COMPAT "maxim,max9295a"
@@ -264,6 +268,8 @@
 						#define SER_INDEX 2
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x43
+						#define SER_CH_SRC_I2C_0_REG 0x39
+						#define SER_CH_DST_I2C_0_REG 0x36
 						#endif
 						#include "gmsl-serializer.dtsi"
 
@@ -285,6 +291,8 @@
 						#define SER_INDEX 3
 						#ifdef GMSL_CHANGE_I2C_ADDR
 						#define SER_HEX_REG 0x44
+						#define SER_CH_SRC_I2C_0_REG 0x3a
+						#define SER_CH_DST_I2C_0_REG 0x36
 						#endif
 						#include "gmsl-serializer.dtsi"
 
@@ -301,8 +309,6 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x41
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_SER_I2C_0_REG 0x37
-				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 
@@ -311,8 +317,6 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x42
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_SER_I2C_0_REG 0x38
-				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
@@ -322,8 +326,6 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x43
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_SER_I2C_0_REG 0x39
-				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
@@ -333,8 +335,6 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x44
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_SER_I2C_0_REG 0x3a
-				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
