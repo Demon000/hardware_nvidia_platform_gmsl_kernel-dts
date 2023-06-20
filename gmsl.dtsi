@@ -33,7 +33,7 @@
 
 // #define GMSL_DESER_MAX9296A
 #define GMSL_CHANGE_I2C_ADDR
-#define GMSL_TRANSLATE_I2C_ADDR
+#define GMSL_TRANSLATE_SER_I2C_ADDR
 // #define GMSL_USE_DESER_MUX
 // #define GMSL_SER_0_MAX9295A
 // #define GMSL_SER_1_MAX9295A
@@ -45,8 +45,8 @@
 #define GMSL_CAMERA_NUM 2
 #endif
 
-#if defined(GMSL_TRANSLATE_I2C_ADDR)
-#undef GMSL_TRANSLATE_I2C_ADDR
+#if defined(GMSL_TRANSLATE_SER_I2C_ADDR)
+#undef GMSL_TRANSLATE_SER_I2C_ADDR
 #endif
 
 #if defined(GMSL_USE_DESER_MUX)
@@ -55,8 +55,8 @@
 
 #endif
 
-#if !defined(GMSL_CHANGE_I2C_ADDR) && defined(GMSL_TRANSLATE_I2C_ADDR)
-#error Cannot use GMSL_CHANGE_I2C_ADDR without GMSL_TRANSLATE_I2C_ADDR
+#if !defined(GMSL_CHANGE_I2C_ADDR) && defined(GMSL_TRANSLATE_SER_I2C_ADDR)
+#error Cannot use GMSL_CHANGE_I2C_ADDR without GMSL_TRANSLATE_SER_I2C_ADDR
 #endif
 
 #if !defined(GMSL_CHANGE_I2C_ADDR) && !defined(GMSL_USE_DESER_MUX)
@@ -230,7 +230,7 @@
 
 				#define DESER_CH_INDEX 0
 				#ifdef GMSL_CHANGE_I2C_ADDR
-				#ifdef GMSL_TRANSLATE_I2C_ADDR
+				#ifdef GMSL_TRANSLATE_SER_I2C_ADDR
 				#define DESER_CH_SRC_I2C_0_REG 0x41
 				#define DESER_CH_DST_I2C_0_REG 0x40
 				#else
@@ -243,7 +243,7 @@
 #if defined(GMSL_CAMERA_2)
 				#define DESER_CH_INDEX 1
 				#ifdef GMSL_CHANGE_I2C_ADDR
-				#ifdef GMSL_TRANSLATE_I2C_ADDR
+				#ifdef GMSL_TRANSLATE_SER_I2C_ADDR
 				#define DESER_CH_SRC_I2C_0_REG 0x42
 				#define DESER_CH_DST_I2C_0_REG 0x40
 				#else
@@ -257,7 +257,7 @@
 #if defined(GMSL_CAMERA_3)
 				#define DESER_CH_INDEX 2
 				#ifdef GMSL_CHANGE_I2C_ADDR
-				#ifdef GMSL_TRANSLATE_I2C_ADDR
+				#ifdef GMSL_TRANSLATE_SER_I2C_ADDR
 				#define DESER_CH_SRC_I2C_0_REG 0x43
 				#define DESER_CH_DST_I2C_0_REG 0x40
 				#else
@@ -271,7 +271,7 @@
 #if defined(GMSL_CAMERA_4)
 				#define DESER_CH_INDEX 3
 				#ifdef GMSL_CHANGE_I2C_ADDR
-				#ifdef GMSL_TRANSLATE_I2C_ADDR
+				#ifdef GMSL_TRANSLATE_SER_I2C_ADDR
 				#define DESER_CH_SRC_I2C_0_REG 0x44
 				#define DESER_CH_DST_I2C_0_REG 0x40
 				#else
