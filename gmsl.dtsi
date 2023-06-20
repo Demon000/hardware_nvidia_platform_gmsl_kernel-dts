@@ -50,6 +50,10 @@
 
 #endif
 
+#if !defined(GMSL_CHANGE_I2C_ADDR) && defined(GMSL_TRANSLATE_I2C_ADDR)
+#error Cannot use GMSL_CHANGE_I2C_ADDR without GMSL_TRANSLATE_I2C_ADDR
+#endif
+
 #define GMSL_CAMERA_1
 #if (GMSL_CAMERA_NUM >= 2)
 #define GMSL_CAMERA_2
