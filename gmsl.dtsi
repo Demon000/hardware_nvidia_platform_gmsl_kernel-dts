@@ -47,6 +47,7 @@
 #if defined(GMSL_TRANSLATE_I2C_ADDR)
 #undef GMSL_TRANSLATE_I2C_ADDR
 #endif
+
 #endif
 
 #define GMSL_CAMERA_1
