@@ -73,10 +73,10 @@ ox03a@OX03A_HEX_REG {
 		default_gain = "16"; /* 1.00x */
 		min_hdr_ratio = "1";
 		max_hdr_ratio = "1";
-		min_framerate = "2000000"; /* 2.0 fps */
+		min_framerate = "30000000"; /* 30.0 fps */
 		max_framerate = "30000000"; /* 30.0 fps */
 		step_framerate = "1";
-		default_framerate = "30000000"; /* 21.0 fps */
+		default_framerate = "30000000"; /* 30.0 fps */
 		min_exp_time = "13"; /* us */
 		max_exp_time = "683709"; /* us */
 		step_exp_time = "1";
