@@ -38,10 +38,12 @@
 // #define GMSL_SER_1_MAX9295A
 
 #ifdef GMSL_DESER_MAX9296A
+
 #if GMSL_CAMERA_NUM > 2
 #undef GMSL_CAMERA_NUM
 #define GMSL_CAMERA_NUM 2
 #endif
+
 #if defined(GMSL_TRANSLATE_I2C_ADDR)
 #undef GMSL_TRANSLATE_I2C_ADDR
 #endif
