@@ -301,8 +301,8 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x41
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_I2C_REG 0x37
-				#define DESER_CH_DST_I2C_REG 0x36
+				#define DESER_CH_SRC_SER_I2C_0_REG 0x37
+				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 
@@ -311,8 +311,8 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x42
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_I2C_REG 0x38
-				#define DESER_CH_DST_I2C_REG 0x36
+				#define DESER_CH_SRC_SER_I2C_0_REG 0x38
+				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
@@ -322,8 +322,8 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x43
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_I2C_REG 0x39
-				#define DESER_CH_DST_I2C_REG 0x36
+				#define DESER_CH_SRC_SER_I2C_0_REG 0x39
+				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
@@ -333,8 +333,8 @@
 				#ifdef GMSL_CHANGE_I2C_ADDR
 				#define DESER_CH_SRC_SER_REG 0x44
 				#define DESER_CH_DST_SER_REG 0x40
-				#define DESER_CH_SRC_I2C_REG 0x3a
-				#define DESER_CH_DST_I2C_REG 0x36
+				#define DESER_CH_SRC_SER_I2C_0_REG 0x3a
+				#define DESER_CH_DST_SER_I2C_0_REG 0x36
 				#endif
 				#include "gmsl-deserializer-channel.dtsi"
 #endif
