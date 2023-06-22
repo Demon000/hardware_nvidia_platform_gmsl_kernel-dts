@@ -23,12 +23,18 @@
 #error
 #endif
 
+#if !defined(OX03A_LABEL)
+#error
+#endif
+
 OX03A_LABEL: ox03a@OX03A_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
 	compatible = "nv,nv-cam";
 	reg = <OX03A_HEX_REG>;
+
+	label = STRINGIFY(OX03A_LABEL);
 
 	nv,skip-s-stream;
 	nv,skip-notifier;

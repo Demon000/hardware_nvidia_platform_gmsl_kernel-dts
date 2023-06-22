@@ -91,23 +91,6 @@
 #define GMSL_MIPI_DT_FE		0x1
 
 / {
-	aliases {
-#if defined(GMSL_USE_DESER_MUX)
-#if defined(GMSL_CAMERA_0)
-		i2c1000 = &deserializer_i2cmux_0;
-#endif
-#if defined(GMSL_CAMERA_1)
-		i2c1001 = &deserializer_i2cmux_1;
-#endif
-#if defined(GMSL_CAMERA_2)
-		i2c1002 = &deserializer_i2cmux_2;
-#endif
-#if defined(GMSL_CAMERA_3)
-		i2c1003 = &deserializer_i2cmux_3;
-#endif
-#endif
-	};
-
 	tegra-capture-vi  {
 		num-channels = <GMSL_CAMERA_NUM>;
 
@@ -482,6 +465,17 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 		isp_peak_byte_per_pixel = <5>;
 		isp_bw_margin_pct = <25>;
 
+		nv,proc-device-tree-paths =
+			"camera0",
+			"camera1",
+			"camera2",
+			"camera3";
+		nv,proc-device-tree-targets = <
+			&camera0
+			&camera1
+			&camera2
+			&camera3>;
+
 		/**
 		 * The general guideline for naming badge_info contains 3 parts, and is as follows,
 		 * The first part is the camera_board_id for the module; if the module is in a FFD
@@ -490,7 +484,6 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 		 * The third part contains the last 6 characters of a part number which is found
 		 * in the module's specsheet from the vendor.
 		 */
-		// TODO: figure out how to handle proc-device-tree cleanly
 #if defined(GMSL_CAMERA_0)
 		modules {
 			module0 {
@@ -499,14 +492,8 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 1000-0036";
-#if defined(GMSL_USE_I2C_BUS_1)
-					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
-#elif defined(GMSL_USE_I2C_BUS_8)
-					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
-#else
-					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
-#endif
+					devname = "camera0";
+					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera0";
 				};
 			};
 #endif
@@ -518,14 +505,8 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 1001-0036";
-#if defined(GMSL_USE_I2C_BUS_1)
-					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
-#elif defined(GMSL_USE_I2C_BUS_8)
-					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
-#else
-					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@1/ox03a@36";
-#endif
+					devname = "camera1";
+					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera1";
 				};
 			};
 #endif
@@ -537,14 +518,8 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 1002-0036";
-#if defined(GMSL_USE_I2C_BUS_1)
-					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
-#elif defined(GMSL_USE_I2C_BUS_8)
-					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
-#else
-					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@2/ox03a@36";
-#endif
+					devname = "camera2";
+					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera2";
 				};
 			};
 #endif
@@ -556,14 +531,8 @@ camera_3_i2c_bus: &serializer_3_i2c_bus {};
 				orientation = "1";
 				drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "ox03a 1003-0036";
-#if defined(GMSL_USE_I2C_BUS_1)
-					proc-device-tree = "/proc/device-tree/i2c@c240000/gmsl-deserializer@27/i2c-mux/i2c@3/ox03a@36";
-#elif defined(GMSL_USE_I2C_BUS_8)
-					proc-device-tree = "/proc/device-tree/i2c@c250000/gmsl-deserializer@27/i2c-mux/i2c@0/ox03a@36";
-#else
-					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@0/gmsl-deserializer@27/i2c-mux/i2c@3/ox03a@36";
-#endif
+					devname = "camera3";
+					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera3";
 				};
 			};
 #endif
