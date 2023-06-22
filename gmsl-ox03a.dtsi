@@ -8,6 +8,7 @@
 #define OX03A_VC_ID	OX03A_INDEX
 #define OX03A_OUT_LABEL CONCAT(ox03a_out, OX03A_INDEX)
 #define OX03A_IN_LABEL CONCAT(ser_in, OX03A_INDEX)
+#define OX03A_LABEL CONCAT(camera, OX03A_INDEX)
 #endif
 
 #if !defined(OX03A_VC_ID)
@@ -22,7 +23,7 @@
 #error
 #endif
 
-ox03a@OX03A_HEX_REG {
+OX03A_LABEL: ox03a@OX03A_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
@@ -567,5 +568,6 @@ ox03a@OX03A_HEX_REG {
 #undef OX03A_HEX_REG
 #undef OX03A_INDEX
 #undef OX03A_VC_ID
+#undef OX03A_LABEL
 #undef OX03A_OUT_LABEL
 #undef OX03A_IN_LABEL
