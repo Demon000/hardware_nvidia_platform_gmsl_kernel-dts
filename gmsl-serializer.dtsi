@@ -7,7 +7,8 @@
 #endif
 
 #ifdef SER_INDEX
-#define SER_LABEL CONCAT(serializer, SER_INDEX)
+#define SER_LABEL CONCAT(serializer_, SER_INDEX)
+#define SER_I2C_LABEL CONCAT(SER_LABEL, _i2c_0)
 #define SER_OUT_LABEL CONCAT(ser_out, SER_INDEX)
 #define SER_IN_LABEL CONCAT(ser_in, SER_INDEX)
 #define SER_OUT_REMOTE_LABEL CONCAT(deser_in, SER_INDEX)
@@ -41,24 +42,21 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	compatible = SER_COMPAT;
 	reg = <SER_HEX_REG>;
 
-#if (defined(SER_CH_SRC_I2C_0_REG) && defined(SER_CH_DST_I2C_0_REG)) || \
-    (defined(SER_CH_SRC_I2C_1_REG) && defined(SER_CH_DST_I2C_1_REG))
-
-#if !defined(SER_CH_SRC_I2C_0_REG) && !defined(SER_CH_DST_I2C_0_REG)
-#define SER_CH_SRC_I2C_0_REG
-#define SER_CH_DST_I2C_0_REG
+#if defined(SER_I2C_ADDR_POLL_0)
+	i2c-alias-pool = <SER_I2C_ADDR_POLL_0>;
 #endif
 
-#if !defined(SER_CH_SRC_I2C_1_REG) && !defined(SER_CH_DST_I2C_1_REG)
-#define SER_CH_SRC_I2C_1_REG
-#define SER_CH_DST_I2C_1_REG
-#endif
+	i2c-atr {
+		#address-cells = <1>;
+		#size-cells = <0>;
 
-	max,i2c-addr-translate = <
-		SER_CH_SRC_I2C_0_REG SER_CH_DST_I2C_0_REG
-		SER_CH_SRC_I2C_1_REG SER_CH_DST_I2C_1_REG
-	>;
-#endif
+		SER_I2C_LABEL: i2c@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			reg = <0>;
+		};
+	};
 
 	pipe@0 {
 		reg = <0>;
@@ -96,10 +94,6 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	};
 };
 
-#undef SER_CH_SRC_I2C_0_REG
-#undef SER_CH_DST_I2C_0_REG
-#undef SER_CH_SRC_I2C_1_REG
-#undef SER_CH_DST_I2C_1_REG
 #undef SER_COMPAT
 #undef SER_HEX_REG
 #undef SER_INDEX
@@ -108,3 +102,4 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 #undef SER_IN_LABEL
 #undef SER_OUT_REMOTE_LABEL
 #undef SER_IN_REMOTE_LABEL
+#undef SER_I2C_ADDR_POLL_0
