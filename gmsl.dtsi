@@ -263,7 +263,7 @@
 		#size-cells = <0>;
 
 #if defined(GMSL_CAMERA_0)
-		deserializer_i2cmux_0: i2c@0 {
+		deserializer_i2c_0: i2c@0 {
 			#address-cells = <1>;
 			#size-cells = <0>;
 
@@ -272,7 +272,7 @@
 #endif
 
 #if defined(GMSL_CAMERA_1)
-		deserializer_i2cmux_1: i2c@1 {
+		deserializer_i2c_1: i2c@1 {
 			#address-cells = <1>;
 			#size-cells = <0>;
 
@@ -281,7 +281,7 @@
 #endif
 
 #if defined(GMSL_CAMERA_2)
-		deserializer_i2cmux_2: i2c@2 {
+		deserializer_i2c_2: i2c@2 {
 			#address-cells = <1>;
 			#size-cells = <0>;
 
@@ -290,7 +290,7 @@
 #endif
 
 #if defined(GMSL_CAMERA_3)
-		deserializer_i2cmux_3: i2c@3 {
+		deserializer_i2c_3: i2c@3 {
 			#address-cells = <1>;
 			#size-cells = <0>;
 
@@ -301,16 +301,16 @@
 };
 
 #if defined(GMSL_CAMERA_0)
-serializer_0_i2c_bus: &deserializer_i2cmux_0 {};
+serializer_0_i2c_bus: &deserializer_i2c_0 {};
 #endif
 #if defined(GMSL_CAMERA_1)
-serializer_1_i2c_bus: &deserializer_i2cmux_1 {};
+serializer_1_i2c_bus: &deserializer_i2c_1 {};
 #endif
 #if defined(GMSL_CAMERA_2)
-serializer_2_i2c_bus: &deserializer_i2cmux_2 {};
+serializer_2_i2c_bus: &deserializer_i2c_2 {};
 #endif
 #if defined(GMSL_CAMERA_3)
-serializer_3_i2c_bus: &deserializer_i2cmux_3 {};
+serializer_3_i2c_bus: &deserializer_i2c_3 {};
 #endif
 #else
 #if defined(GMSL_CAMERA_0)
