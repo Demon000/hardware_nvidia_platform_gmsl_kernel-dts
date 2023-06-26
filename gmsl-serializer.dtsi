@@ -7,10 +7,15 @@
 #endif
 
 #ifdef SER_INDEX
+#define SER_LABEL CONCAT(serializer, SER_INDEX)
 #define SER_OUT_LABEL CONCAT(ser_out, SER_INDEX)
 #define SER_IN_LABEL CONCAT(ser_in, SER_INDEX)
 #define SER_OUT_REMOTE_LABEL CONCAT(deser_in, SER_INDEX)
 #define SER_IN_REMOTE_LABEL CONCAT(ox03a_out, SER_INDEX)
+#endif
+
+#if !defined(SER_LABEL)
+#error
 #endif
 
 #if !defined(SER_OUT_LABEL)
@@ -29,7 +34,7 @@
 #error
 #endif
 
-gmsl-serializer@SER_HEX_REG {
+SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
@@ -98,6 +103,7 @@ gmsl-serializer@SER_HEX_REG {
 #undef SER_COMPAT
 #undef SER_HEX_REG
 #undef SER_INDEX
+#undef SER_LABEL
 #undef SER_OUT_LABEL
 #undef SER_IN_LABEL
 #undef SER_OUT_REMOTE_LABEL
