@@ -195,6 +195,8 @@ deserializer_i2c_bus: &cam_i2c {};
 #endif
 
 &deserializer_i2c_bus {
+	status = "okay";
+
 	#ifdef GMSL_DESER_MAX9296A
 	deserializer: gmsl-deserializer@48 {
 	#else
