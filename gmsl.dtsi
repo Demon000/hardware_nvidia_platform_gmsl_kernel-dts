@@ -190,7 +190,11 @@ deserializer_i2c_bus: &cam_i2c {};
 #elif defined(GMSL_USE_I2C_MUX)
 / {
 	cam_i2cmux {
+#if !defined(GMSL_USE_PORT_2)
 		deserializer_i2c_bus: i2c@0 {};
+#else
+		deserializer_i2c_bus: i2c@1 {};
+#endif
 	};
 };
 #else
