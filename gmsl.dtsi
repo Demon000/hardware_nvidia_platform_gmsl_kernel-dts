@@ -16,7 +16,7 @@
  */
 #include <dt-bindings/media/camera.h>
 
-// #define GMSL_USE_I2C_BUS_1
+// #define GMSL_USE_I2C_BUS_2
 // #define GMSL_USE_I2C_BUS_8
 // #define GMSL_USE_I2C_MUX_BUS
 // #define GMSL_LANE_POLARITY_SWAP
@@ -180,19 +180,19 @@
 	};
 };
 
-/ {
-#if defined(GMSL_USE_I2C_BUS_1)
-	deserializer_i2c_bus: i2c@c240000 {};
+#if defined(GMSL_USE_I2C_BUS_2)
+deserializer_i2c_bus: &gen2_i2c {};
 #elif defined(GMSL_USE_I2C_BUS_8)
-	deserializer_i2c_bus: i2c@c250000 {};
+deserializer_i2c_bus: &gen8_i2c {};
 #elif defined(GMSL_USE_I2C_MUX_BUS)
-	deserializer_i2c_bus: i2c@3180000 {};
+deserializer_i2c_bus: &cam_i2c {};
 #else
+/ {
 	cam_i2cmux {
 		deserializer_i2c_bus: i2c@0 {};
 	};
-#endif
 };
+#endif
 
 &deserializer_i2c_bus {
 	#ifdef GMSL_DESER_MAX9296A
