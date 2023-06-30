@@ -19,6 +19,7 @@
 // #define GMSL_USE_I2C_BUS_2
 // #define GMSL_USE_I2C_BUS_8
 // #define GMSL_USE_I2C_MUX_BUS
+// #define GMSL_USE_I2C_MUX
 // #define GMSL_LANE_POLARITY_SWAP
 // #define GMSL_USE_PORT_1
 // #define GMSL_USE_PORT_2
@@ -186,12 +187,14 @@ deserializer_i2c_bus: &gen2_i2c {};
 deserializer_i2c_bus: &gen8_i2c {};
 #elif defined(GMSL_USE_I2C_MUX_BUS)
 deserializer_i2c_bus: &cam_i2c {};
-#else
+#elif defined(GMSL_USE_I2C_MUX)
 / {
 	cam_i2cmux {
 		deserializer_i2c_bus: i2c@0 {};
 	};
 };
+#else
+#error
 #endif
 
 &deserializer_i2c_bus {
