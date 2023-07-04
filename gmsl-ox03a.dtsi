@@ -563,7 +563,7 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 
 			OX03A_OUT_LABEL: endpoint {
 				port-index = <GMSL_PORT>;
-				bus-width = <4>;
+				bus-width = <2>;
 				data-lanes = <1 2 3 4>;
 				remote-endpoint = <&OX03A_IN_LABEL>;
 			};
