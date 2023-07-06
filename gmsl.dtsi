@@ -35,6 +35,8 @@
 // #define GMSL_DESER_MAX9296A
 // #define GMSL_SER_0_MAX9295A
 // #define GMSL_SER_1_MAX9295A
+// #define GMSL_SER_2_MAX9295A
+// #define GMSL_SER_3_MAX9295A
 
 #ifdef GMSL_DESER_MAX9296A
 
@@ -336,6 +338,9 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 &serializer_2_i2c_bus {
 	#define SER_INDEX 2
 	#define SER_I2C_ADDR_POLL_0 GMSL_CAM_2_HEX_ADDR
+	#ifdef GMSL_SER_2_MAX9295A
+	#define SER_COMPAT "maxim,max9295a"
+	#endif
 	#include "gmsl-serializer.dtsi"
 };
 #endif
@@ -344,6 +349,9 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 &serializer_3_i2c_bus {
 	#define SER_INDEX 3
 	#define SER_I2C_ADDR_POLL_0 GMSL_CAM_3_HEX_ADDR
+	#ifdef GMSL_SER_3_MAX9295A
+	#define SER_COMPAT "maxim,max9295a"
+	#endif
 	#include "gmsl-serializer.dtsi"
 };
 #endif
