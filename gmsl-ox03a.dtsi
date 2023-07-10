@@ -27,7 +27,7 @@
 #error
 #endif
 
-#define OX03A_USE_AD_GAIN
+// #define OX03A_USE_AD_GAIN
 
 OX03A_LABEL: ox03a@OX03A_HEX_REG {
 	#address-cells = <1>;
