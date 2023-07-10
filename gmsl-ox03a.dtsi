@@ -27,6 +27,8 @@
 #error
 #endif
 
+#define OX03A_USE_AD_GAIN
+
 OX03A_LABEL: ox03a@OX03A_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -510,6 +512,27 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 			0x3501 0x01
 			0x3502 0x90
 		>;
+#if defined(OX03A_USE_AD_GAIN)
+		nv,gain-type = "ad";
+
+		nv,again-min = <16>;
+		nv,again-max = <248>;
+		nv,again-regs = <0x3508 0x3509>;
+		nv,again-source-masks = <0xf0 0x0f>;
+		nv,again-target-masks = <0x0f 0xf0>;
+
+		nv,dgain-min = <1024>;
+		nv,dgain-max = <16383>;
+		nv,dgain-regs = <0x350a 0x350b 0x350c>;
+		nv,dgain-source-masks = <0x3c00 0x3fc 0x3>;
+		nv,dgain-target-masks = <0x0f 0xff 0xc000>;
+#else
+		nv,gain-type = "simple";
+
+		nv,gain-regs = <0x3508 0x3509>;
+		nv,gain-source-masks = <0xf0 0x0f>;
+		nv,gain-target-masks = <0x0f 0xf0>;
+#endif
 
 		mclk_khz = "25000";
 		num_lanes = "2";
@@ -534,11 +557,19 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 		mclk_multiplier = "10";
 		pix_clk_hz = "250000000";
 
+#if defined(OX03A_USE_AD_GAIN)
+		gain_factor = "16384";
+		min_gain_val = "16384"; /* 1.00x */
+		max_gain_val = "4062984"; /* 247.984863281x ((16 - 8/16) * (16 - 1/1024)) */
+		step_gain_val = "1";
+		default_gain = "16384"; /* 1.00x */
+#else
 		gain_factor = "16";
 		min_gain_val = "16"; /* 1.00x */
-		max_gain_val = "170"; /* 10.66x */
+		max_gain_val = "248"; /* 15.5x (16 - 1/16) */
 		step_gain_val = "1";
 		default_gain = "16"; /* 1.00x */
+#endif
 
 		min_hdr_ratio = "1";
 		max_hdr_ratio = "1";
