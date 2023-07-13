@@ -100,6 +100,7 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 		SER_MFP0_PWDN_LABEL: SER_MFP0_PWDN_LABEL {
 			pins = "mfp0";
 			function = "gpio";
+			bias-pull-up;
 		};
 
 		SER_MFP4_RCLK_LABEL: SER_MFP4_RCLK_LABEL {
