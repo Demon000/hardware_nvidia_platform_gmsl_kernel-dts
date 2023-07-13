@@ -42,6 +42,9 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	compatible = SER_COMPAT;
 	reg = <SER_HEX_REG>;
 
+	gpio-controller;
+	#gpio-cells = <2>;
+
 #if defined(SER_I2C_ADDR_POLL_0)
 	i2c-alias-pool = <SER_I2C_ADDR_POLL_0>;
 #endif
