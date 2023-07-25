@@ -31,22 +31,10 @@
 #error
 #endif
 
-pipe@DESER_CH_REG {
-	reg = <DESER_CH_REG>;
-
-	max,phy-id = <GMSL_PHY>;
-};
-
 channel@DESER_CH_REG {
 	reg = <DESER_CH_REG>;
 
-	max,pipe-id = <DESER_CH_REG>;
-	max,src-vc-id = <0x00>;
-	max,dst-vc-id = <DESER_CH_VC_ID>;
-	max,dt-vc-phy-remap =
-		<GMSL_MIPI_DT 0x00 GMSL_MIPI_DT DESER_CH_VC_ID GMSL_PHY>,
-		<GMSL_MIPI_DT_FS 0x00 GMSL_MIPI_DT_FS DESER_CH_VC_ID GMSL_PHY>,
-		<GMSL_MIPI_DT_FE 0x00 GMSL_MIPI_DT_FE DESER_CH_VC_ID GMSL_PHY>;
+	max,phy-id = <GMSL_PHY>;
 
 	nv,subdev-for-calls;
 
