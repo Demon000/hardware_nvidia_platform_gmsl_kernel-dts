@@ -31,8 +31,6 @@ channel@DESER_CH_REG {
 
 	max,phy-id = <GMSL_PHY>;
 
-	nv,subdev-for-calls;
-
 	ports {
 		#address-cells = <1>;
 		#size-cells = <0>;

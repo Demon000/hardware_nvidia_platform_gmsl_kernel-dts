@@ -60,10 +60,6 @@ CAM_LABEL: ox03a@CAM_HEX_REG {
 	pwdn-gpios = <&CAM_SER_LABEL 0 GPIO_ACTIVE_HIGH>;
 	nv,pwdn-sleep-us = <500000>;
 
-	nv,skip-s-stream;
-	nv,skip-notifier;
-	nv,skip-link;
-
 	physical_w = "3.680";
 	physical_h = "2.760";
 
