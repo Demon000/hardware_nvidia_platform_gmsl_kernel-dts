@@ -35,6 +35,10 @@
 #error
 #endif
 
+#if !defined(SER_I2C_ADDR_POOL_0)
+#error
+#endif
+
 SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -45,9 +49,7 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 	gpio-controller;
 	#gpio-cells = <2>;
 
-#if defined(SER_I2C_ADDR_POLL_0)
-	i2c-alias-pool = <SER_I2C_ADDR_POLL_0>;
-#endif
+	i2c-alias-pool = <SER_I2C_ADDR_POOL_0>;
 
 	i2c-atr {
 		#address-cells = <1>;
@@ -125,4 +127,4 @@ SER_LABEL: gmsl-serializer@SER_HEX_REG {
 #undef SER_IN_REMOTE_LABEL
 #undef SER_MFP0_PWDN_LABEL
 #undef SER_MFP4_RCLK_LABEL
-#undef SER_I2C_ADDR_POLL_0
+#undef SER_I2C_ADDR_POOL_0
