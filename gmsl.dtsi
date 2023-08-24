@@ -14,15 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <dt-bindings/media/camera.h>
 
-// #define GMSL_USE_I2C_BUS_2
-// #define GMSL_USE_I2C_BUS_8
-// #define GMSL_USE_I2C_MUX_BUS
-// #define GMSL_USE_I2C_MUX
-// #define GMSL_LANE_POLARITY_SWAP
-// #define GMSL_USE_PORT_1
-// #define GMSL_USE_PORT_2
+#include <dt-bindings/media/camera.h>
 
 #define _CONCAT(a, b) a ## b
 #define CONCAT(a, b) _CONCAT(a, b)
@@ -30,225 +23,451 @@
 #define _STRINGIFY(a) # a
 #define STRINGIFY(a) _STRINGIFY(a)
 
-#define GMSL_CAMERA_NUM	4
+/*
+Configuration parameters:
 
-// #define GMSL_DESER_MAX9296A
-// #define GMSL_SER_0_MAX9295A
-// #define GMSL_SER_1_MAX9295A
-// #define GMSL_SER_2_MAX9295A
-// #define GMSL_SER_3_MAX9295A
+#define GMSL_TEGRA_PLATFORM
+#define GMSL_TEGRA_LANE_POLARITY_SWAP
+#define GMSL_TEGRA_PORT
 
-#ifdef GMSL_DESER_MAX9296A
+#define GMSL_CAMERA_NUM
+#define GMSL_DESER_PHY
+#define GMSL_DESER_PHY_NUM_LANES
+#define GMSL_DESER_I2C_LABEL
+#define GMSL_DESER_PHY_ALT_MEM_MAP12
 
-#if GMSL_CAMERA_NUM > 2
-#undef GMSL_CAMERA_NUM
-#define GMSL_CAMERA_NUM 2
+#define GMSL_DESER_MAX9296A
+#define GMSL_DESER_MAX96724
+#define GMSL_DESER_COMPATIBLE
+
+#define GMSL_SER_0_MAX96717
+#define GMSL_SER_0_MAX9295A
+#define GMSL_SER_0_COMPATIBLE
+
+#define GMSL_SER_1_MAX96717
+#define GMSL_SER_1_MAX9295A
+#define GMSL_SER_1_COMPATIBLE
+
+#define GMSL_SER_2_MAX96717
+#define GMSL_SER_2_MAX9295A
+#define GMSL_SER_2_COMPATIBLE
+
+#define GMSL_SER_3_MAX96717
+#define GMSL_SER_3_MAX9295A
+#define GMSL_SER_3_COMPATIBLE
+
+#define GMSL_CAM_0_TEGRA_OX03A
+#define GMSL_CAM_1_TEGRA_OX03A
+#define GMSL_CAM_2_TEGRA_OX03A
+#define GMSL_CAM_3_TEGRA_OX03A
+
+#define GMSL_SER_0_HEX_ADDR		0x41
+#define GMSL_SER_1_HEX_ADDR		0x42
+#define GMSL_SER_2_HEX_ADDR		0x43
+#define GMSL_SER_3_HEX_ADDR		0x44
+
+#define GMSL_SER_0_DEFAULT_HEX_ADDR	0x40
+#define GMSL_SER_1_DEFAULT_HEX_ADDR	0x40
+#define GMSL_SER_2_DEFAULT_HEX_ADDR	0x40
+#define GMSL_SER_3_DEFAULT_HEX_ADDR	0x40
+
+#define GMSL_CAM_0_HEX_ADDR		0x37
+#define GMSL_CAM_1_HEX_ADDR		0x38
+#define GMSL_CAM_2_HEX_ADDR		0x39
+#define GMSL_CAM_3_HEX_ADDR		0x3a
+
+#define GMSL_CAM_0_NUM_LANES		4
+#define GMSL_CAM_1_NUM_LANES		4
+#define GMSL_CAM_2_NUM_LANES		4
+#define GMSL_CAM_3_NUM_LANES		4
+
+#define GMSL_CAM_0_DEFAULT_HEX_ADDR	0x36
+#define GMSL_CAM_1_DEFAULT_HEX_ADDR	0x36
+#define GMSL_CAM_2_DEFAULT_HEX_ADDR	0x36
+#define GMSL_CAM_3_DEFAULT_HEX_ADDR	0x36
+
+#define GMSL_CAM_0_INCLUDE		"gmsl-ox03a.dtsi"
+#define GMSL_CAM_1_INCLUDE		"gmsl-ox03a.dtsi"
+#define GMSL_CAM_2_INCLUDE		"gmsl-ox03a.dtsi"
+#define GMSL_CAM_3_INCLUDE		"gmsl-ox03a.dtsi"
+
+#define GMSL_CAM_0_PINS_INCLUDE		"gmsl-serializer-pins-ox03a.dtsi"
+#define GMSL_CAM_1_PINS_INCLUDE		"gmsl-serializer-pins-ox03a.dtsi"
+#define GMSL_CAM_2_PINS_INCLUDE		"gmsl-serializer-pins-ox03a.dtsi"
+#define GMSL_CAM_3_PINS_INCLUDE		"gmsl-serializer-pins-ox03a.dtsi"
+*/
+
+#if !defined(GMSL_CAMERA_NUM)
+#error
 #endif
 
+#if !defined(GMSL_DESER_I2C_LABEL)
+#error
 #endif
 
-#if (GMSL_CAMERA_NUM >= 1)
+#if !defined(GMSL_DESER_PHY_NUM_LANES)
+#error
+#endif
+
+/* MAX9296A does not support more than two cameras. */
+#if defined(GMSL_DESER_MAX9296A) && GMSL_CAMERA_NUM > 2
+#error
+#endif
+
+#define GMSL_MAX96717_COMPAT "maxim,max96717"
+#define GMSL_MAX9295A_COMPAT "maxim,max9295a"
+#define GMSL_MAX96724_COMPAT "maxim,max96724"
+#define GMSL_MAX9296A_COMPAT "maxim,max9296a"
+#define GMSL_OX03A_INCLUDE "gmsl-ox03a.dtsi"
+#define GMSL_SER_PINS_OX03A_INCLUDE "gmsl-serializer-pins-ox03a.dtsi"
+
+#if GMSL_CAMERA_NUM >= 1
 #define GMSL_CAMERA_0
 #endif
-#if (GMSL_CAMERA_NUM >= 2)
+#if GMSL_CAMERA_NUM >= 2
 #define GMSL_CAMERA_1
 #endif
-#if (GMSL_CAMERA_NUM >= 3)
+#if GMSL_CAMERA_NUM >= 3
 #define GMSL_CAMERA_2
 #endif
-#if (GMSL_CAMERA_NUM >= 4)
+#if GMSL_CAMERA_NUM >= 4
 #define GMSL_CAMERA_3
 #endif
 
-#ifdef GMSL_DESER_MAX9296A
-#define GMSL_PHY		0x1
-#else
-#define GMSL_PHY		0x2
+#if GMSL_CAMERA_NUM > 4
+#error
 #endif
 
-#if defined(GMSL_USE_PORT_1)
-#define GMSL_PORT		0x1
-#define GMSL_PORT_SERIAL	"serial_b"
-#elif defined(GMSL_USE_PORT_2)
-#define GMSL_PORT		0x2
-#define GMSL_PORT_SERIAL	"serial_c"
-#else
-#define GMSL_PORT		0x0
-#define GMSL_PORT_SERIAL	"serial_a"
-#endif
-
-#define GMSL_SER_0_HEX_ADDR	0x41
-#define GMSL_SER_1_HEX_ADDR	0x42
-#define GMSL_SER_2_HEX_ADDR	0x43
-#define GMSL_SER_3_HEX_ADDR	0x44
-
-#define GMSL_CAM_0_HEX_ADDR	0x37
-#define GMSL_CAM_1_HEX_ADDR	0x38
-#define GMSL_CAM_2_HEX_ADDR	0x39
-#define GMSL_CAM_3_HEX_ADDR	0x3a
-
-#define GMSL_CAM_OX03A
-
-/ {
-	tegra-capture-vi  {
-		num-channels = <GMSL_CAMERA_NUM>;
-
-		ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-#if defined(GMSL_CAMERA_0)
-			port@0 {
-				reg = <0>;
-
-				vi_in0: endpoint {
-					vc-id = <0>;
-					port-index = <GMSL_PORT>;
-					bus-width = <2>;
-					remote-endpoint = <&csi_out0>;
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_1)
-			port@1 {
-				reg = <1>;
-
-				vi_in1: endpoint {
-					vc-id = <1>;
-					port-index = <GMSL_PORT>;
-					bus-width = <2>;
-					remote-endpoint = <&csi_out1>;
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_2)
-			port@2 {
-				reg = <2>;
-
-				vi_in2: endpoint {
-					vc-id = <2>;
-					port-index = <GMSL_PORT>;
-					bus-width = <2>;
-					remote-endpoint = <&csi_out2>;
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_3)
-			port@3 {
-				reg = <3>;
-
-				vi_in3: endpoint {
-					vc-id = <3>;
-					port-index = <GMSL_PORT>;
-					bus-width = <2>;
-					remote-endpoint = <&csi_out3>;
-				};
-			};
-#endif
-		};
-	};
-
-	host1x@13e00000 {
-		nvcsi@15a00000 {
-			num-channels = <GMSL_CAMERA_NUM>;
-
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-#if defined(GMSL_CAMERA_0)
-			#define NVCSI_CH_INDEX 0
-			#include "gmsl-nvcsi-channel.dtsi"
-#endif
-
-#if defined(GMSL_CAMERA_1)
-			#define NVCSI_CH_INDEX 1
-			#include "gmsl-nvcsi-channel.dtsi"
-#endif
-
-#if defined(GMSL_CAMERA_2)
-			#define NVCSI_CH_INDEX 2
-			#include "gmsl-nvcsi-channel.dtsi"
-#endif
-
-#if defined(GMSL_CAMERA_3)
-			#define NVCSI_CH_INDEX 3
-			#include "gmsl-nvcsi-channel.dtsi"
-#endif
-		};
-	};
-};
-
-#if defined(GMSL_USE_I2C_BUS_2)
-deserializer_i2c_bus: &gen2_i2c {};
-#elif defined(GMSL_USE_I2C_BUS_8)
-deserializer_i2c_bus: &gen8_i2c {};
-#elif defined(GMSL_USE_I2C_MUX_BUS)
-deserializer_i2c_bus: &cam_i2c {};
-#elif defined(GMSL_USE_I2C_MUX)
-/ {
-	cam_i2cmux {
-#if !defined(GMSL_USE_PORT_2)
-		deserializer_i2c_bus: i2c@0 {};
-#else
-		deserializer_i2c_bus: i2c@1 {};
-#endif
-	};
-};
+/*
+ * Default to PHY 2.
+ * MAX9296A only has two PHYs, but configuring PHY 1 in two lane mode
+ * results in the same configuration as MAX96724.
+ */
+#if !defined(GMSL_DESER_PHY)
+#if defined(GMSL_DESER_MAX9296A)
+#define GMSL_DESER_PHY		0x1
+#elif defined(GMSL_DESER_MAX96724)
+#define GMSL_DESER_PHY		0x2
 #else
 #error
 #endif
+#endif
+
+#if !defined(GMSL_DESER_HEX_ADDR)
+#if defined(GMSL_DESER_MAX9296A)
+#define GMSL_DESER_HEX_ADDR		0x48
+#elif defined(GMSL_DESER_MAX96724)
+#define GMSL_DESER_HEX_ADDR		0x27
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_DESER_COMPATIBLE)
+#if defined(GMSL_DESER_MAX9296A)
+#define GMSL_DESER_COMPATIBLE		GMSL_MAX9296A_COMPAT
+#elif defined(GMSL_DESER_MAX96724)
+#define GMSL_DESER_COMPATIBLE		GMSL_MAX96724_COMPAT
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_0_COMPATIBLE)
+#if defined(GMSL_SER_0_MAX96717)
+#define GMSL_SER_0_COMPATIBLE		GMSL_MAX96717_COMPAT
+#elif defined(GMSL_SER_0_MAX9295A)
+#define GMSL_SER_0_COMPATIBLE		GMSL_MAX9295A_COMPAT
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_1_COMPATIBLE)
+#if defined(GMSL_SER_1_MAX96717)
+#define GMSL_SER_1_COMPATIBLE		GMSL_MAX96717_COMPAT
+#elif defined(GMSL_SER_1_MAX9295A)
+#define GMSL_SER_1_COMPATIBLE		GMSL_MAX9295A_COMPAT
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_2_COMPATIBLE)
+#if defined(GMSL_SER_2_MAX96717)
+#define GMSL_SER_2_COMPATIBLE		GMSL_MAX96717_COMPAT
+#elif defined(GMSL_SER_2_MAX9295A)
+#define GMSL_SER_2_COMPATIBLE		GMSL_MAX9295A_COMPAT
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_3_COMPATIBLE)
+#if defined(GMSL_SER_3_MAX96717)
+#define GMSL_SER_3_COMPATIBLE		GMSL_MAX96717_COMPAT
+#elif defined(GMSL_SER_3_MAX9295A)
+#define GMSL_SER_3_COMPATIBLE		GMSL_MAX9295A_COMPAT
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_0_DEFAULT_HEX_ADDR)
+#if defined(GMSL_SER_0_MAX96717) || defined(GMSL_SER_0_MAX9295A)
+#define GMSL_SER_0_DEFAULT_HEX_ADDR	0x40
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_1_DEFAULT_HEX_ADDR)
+#if defined(GMSL_SER_0_MAX96717) || defined(GMSL_SER_0_MAX9295A)
+#define GMSL_SER_1_DEFAULT_HEX_ADDR	0x40
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_2_DEFAULT_HEX_ADDR)
+#if defined(GMSL_SER_0_MAX96717) || defined(GMSL_SER_0_MAX9295A)
+#define GMSL_SER_2_DEFAULT_HEX_ADDR	0x40
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_3_DEFAULT_HEX_ADDR)
+#if defined(GMSL_SER_0_MAX96717) || defined(GMSL_SER_0_MAX9295A)
+#define GMSL_SER_3_DEFAULT_HEX_ADDR	0x40
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_SER_0_HEX_ADDR)
+#define GMSL_SER_0_HEX_ADDR		0x41
+#endif
+
+#if !defined(GMSL_SER_1_HEX_ADDR)
+#define GMSL_SER_1_HEX_ADDR		0x42
+#endif
+
+#if !defined(GMSL_SER_2_HEX_ADDR)
+#define GMSL_SER_2_HEX_ADDR		0x43
+#endif
+
+#if !defined(GMSL_SER_3_HEX_ADDR)
+#define GMSL_SER_3_HEX_ADDR		0x44
+#endif
+
+#if !defined(GMSL_CAM_0_DEFAULT_HEX_ADDR)
+#if defined(GMSL_CAM_0_TEGRA_OX03A)
+#define GMSL_CAM_0_DEFAULT_HEX_ADDR	0x36
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_1_DEFAULT_HEX_ADDR)
+#if defined(GMSL_CAM_1_TEGRA_OX03A)
+#define GMSL_CAM_1_DEFAULT_HEX_ADDR	0x36
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_2_DEFAULT_HEX_ADDR)
+#if defined(GMSL_CAM_2_TEGRA_OX03A)
+#define GMSL_CAM_2_DEFAULT_HEX_ADDR	0x36
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_3_DEFAULT_HEX_ADDR)
+#if defined(GMSL_CAM_3_TEGRA_OX03A)
+#define GMSL_CAM_3_DEFAULT_HEX_ADDR	0x36
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_0_HEX_ADDR)
+#define GMSL_CAM_0_HEX_ADDR		0x37
+#endif
+
+#if !defined(GMSL_CAM_1_HEX_ADDR)
+#define GMSL_CAM_1_HEX_ADDR		0x38
+#endif
+
+#if !defined(GMSL_CAM_2_HEX_ADDR)
+#define GMSL_CAM_2_HEX_ADDR		0x39
+#endif
+
+#if !defined(GMSL_CAM_3_HEX_ADDR)
+#define GMSL_CAM_3_HEX_ADDR		0x3a
+#endif
+
+#if !defined(GMSL_CAM_0_INCLUDE)
+#if defined(GMSL_CAM_0_TEGRA_OX03A)
+#define GMSL_CAM_0_INCLUDE		GMSL_OX03A_INCLUDE
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_1_INCLUDE)
+#if defined(GMSL_CAM_1_TEGRA_OX03A)
+#define GMSL_CAM_1_INCLUDE		GMSL_OX03A_INCLUDE
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_2_INCLUDE)
+#if defined(GMSL_CAM_2_TEGRA_OX03A)
+#define GMSL_CAM_2_INCLUDE		GMSL_OX03A_INCLUDE
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_3_INCLUDE)
+#if defined(GMSL_CAM_3_TEGRA_OX03A)
+#define GMSL_CAM_3_INCLUDE		GMSL_OX03A_INCLUDE
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_0_PINS_INCLUDE)
+#if defined(GMSL_CAM_0_TEGRA_OX03A)
+#define GMSL_CAM_0_PINS_INCLUDE		GMSL_SER_PINS_OX03A_INCLUDE
+#endif
+#endif
+
+#if !defined(GMSL_CAM_1_PINS_INCLUDE)
+#if defined(GMSL_CAM_1_TEGRA_OX03A)
+#define GMSL_CAM_1_PINS_INCLUDE		GMSL_SER_PINS_OX03A_INCLUDE
+#endif
+#endif
+
+#if !defined(GMSL_CAM_2_PINS_INCLUDE)
+#if defined(GMSL_CAM_2_TEGRA_OX03A)
+#define GMSL_CAM_2_PINS_INCLUDE		GMSL_SER_PINS_OX03A_INCLUDE
+#endif
+#endif
+
+#if !defined(GMSL_CAM_3_PINS_INCLUDE)
+#if defined(GMSL_CAM_3_TEGRA_OX03A)
+#define GMSL_CAM_3_PINS_INCLUDE		GMSL_SER_PINS_OX03A_INCLUDE
+#endif
+#endif
+
+#if !defined(GMSL_CAM_0_NUM_LANES)
+#if defined(GMSL_CAM_0_TEGRA_OX03A)
+#define GMSL_CAM_0_NUM_LANES		4
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_1_NUM_LANES)
+#if defined(GMSL_CAM_1_TEGRA_OX03A)
+#define GMSL_CAM_1_NUM_LANES		4
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_2_NUM_LANES)
+#if defined(GMSL_CAM_2_TEGRA_OX03A)
+#define GMSL_CAM_2_NUM_LANES		4
+#else
+#error
+#endif
+#endif
+
+#if !defined(GMSL_CAM_3_NUM_LANES)
+#if defined(GMSL_CAM_3_TEGRA_OX03A)
+#define GMSL_CAM_3_NUM_LANES		4
+#else
+#error
+#endif
+#endif
+
+#if defined(GMSL_TEGRA_PLATFORM)
+#include "gmsl-tegra.dtsi"
+#else
+
+#if defined(GMSL_CAM_0_TEGRA_OX03A)
+#error
+#endif
+
+#if defined(GMSL_CAM_1_TEGRA_OX03A)
+#error
+#endif
+
+#if defined(GMSL_CAM_2_TEGRA_OX03A)
+#error
+#endif
+
+#if defined(GMSL_CAM_3_TEGRA_OX03A)
+#error
+#endif
+
+#endif
+
+deserializer_i2c_bus: &GMSL_DESER_I2C_LABEL {};
 
 &deserializer_i2c_bus {
 	status = "okay";
 
-	#ifdef GMSL_DESER_MAX9296A
-	deserializer: gmsl-deserializer@48 {
-	#else
-	deserializer: gmsl-deserializer@27 {
-	#endif
+	deserializer: gmsl-deserializer@GMSL_DESER_HEX_ADDR {
 		#address-cells = <1>;
 		#size-cells = <0>;
 
-		#ifdef GMSL_DESER_MAX9296A
-		compatible = "maxim,max9296a";
-		#else
-		compatible = "maxim,max96724";
-		#endif
-		#ifdef GMSL_DESER_MAX9296A
-		reg = <0x48>;
-		#else
-		reg = <0x27>;
-		#endif
+		compatible = GMSL_DESER_COMPATIBLE;
+
+		reg = <GMSL_DESER_HEX_ADDR>;
 	};
 };
 
 &deserializer {
-	phy@GMSL_PHY {
-		reg = <GMSL_PHY>;
+	phy@GMSL_DESER_PHY {
+		reg = <GMSL_DESER_PHY>;
 
+#if defined(GMSL_DESER_PHY_ALT_MEM_MAP12)
 		max,alt-mem-map12;
+#endif
 	};
 
 #if defined(GMSL_CAMERA_0)
 	#define DESER_CH_INDEX 0
+	#define DESER_CH_PHY GMSL_DESER_PHY
+	#define DESER_CH_PHY_NUM_LANES GMSL_DESER_PHY_NUM_LANES
 	#include "gmsl-deserializer-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_1)
 	#define DESER_CH_INDEX 1
+	#define DESER_CH_PHY GMSL_DESER_PHY
+	#define DESER_CH_PHY_NUM_LANES GMSL_DESER_PHY_NUM_LANES
 	#include "gmsl-deserializer-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_2)
 	#define DESER_CH_INDEX 2
+	#define DESER_CH_PHY GMSL_DESER_PHY
+	#define DESER_CH_PHY_NUM_LANES GMSL_DESER_PHY_NUM_LANES
 	#include "gmsl-deserializer-channel.dtsi"
 #endif
 
 #if defined(GMSL_CAMERA_3)
 	#define DESER_CH_INDEX 3
+	#define DESER_CH_PHY GMSL_DESER_PHY
+	#define DESER_CH_PHY_NUM_LANES GMSL_DESER_PHY_NUM_LANES
 	#include "gmsl-deserializer-channel.dtsi"
 #endif
 };
@@ -319,10 +538,10 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 #if defined(GMSL_CAMERA_0)
 &serializer_0_i2c_bus {
 	#define SER_INDEX 0
+	#define SER_COMPAT GMSL_SER_0_COMPATIBLE
+	#define SER_HEX_REG GMSL_SER_0_DEFAULT_HEX_ADDR
 	#define SER_I2C_ADDR_POOL_0 GMSL_CAM_0_HEX_ADDR
-	#ifdef GMSL_SER_0_MAX9295A
-	#define SER_COMPAT "maxim,max9295a"
-	#endif
+	#define SER_NUM_LANES GMSL_CAM_0_NUM_LANES
 	#include "gmsl-serializer.dtsi"
 };
 #endif
@@ -330,10 +549,10 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 #if defined(GMSL_CAMERA_1)
 &serializer_1_i2c_bus {
 	#define SER_INDEX 1
+	#define SER_COMPAT GMSL_SER_1_COMPATIBLE
+	#define SER_HEX_REG GMSL_SER_1_DEFAULT_HEX_ADDR
 	#define SER_I2C_ADDR_POOL_0 GMSL_CAM_1_HEX_ADDR
-	#ifdef GMSL_SER_1_MAX9295A
-	#define SER_COMPAT "maxim,max9295a"
-	#endif
+	#define SER_NUM_LANES GMSL_CAM_1_NUM_LANES
 	#include "gmsl-serializer.dtsi"
 };
 #endif
@@ -341,10 +560,10 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 #if defined(GMSL_CAMERA_2)
 &serializer_2_i2c_bus {
 	#define SER_INDEX 2
+	#define SER_COMPAT GMSL_SER_2_COMPATIBLE
+	#define SER_HEX_REG GMSL_SER_2_DEFAULT_HEX_ADDR
 	#define SER_I2C_ADDR_POOL_0 GMSL_CAM_2_HEX_ADDR
-	#ifdef GMSL_SER_2_MAX9295A
-	#define SER_COMPAT "maxim,max9295a"
-	#endif
+	#define SER_NUM_LANES GMSL_CAM_2_NUM_LANES
 	#include "gmsl-serializer.dtsi"
 };
 #endif
@@ -352,10 +571,10 @@ serializer_3_i2c_bus: &deserializer_i2c_3 {};
 #if defined(GMSL_CAMERA_3)
 &serializer_3_i2c_bus {
 	#define SER_INDEX 3
+	#define SER_COMPAT GMSL_SER_3_COMPATIBLE
+	#define SER_HEX_REG GMSL_SER_3_DEFAULT_HEX_ADDR
 	#define SER_I2C_ADDR_POOL_0 GMSL_CAM_3_HEX_ADDR
-	#ifdef GMSL_SER_3_MAX9295A
-	#define SER_COMPAT "maxim,max9295a"
-	#endif
+	#define SER_NUM_LANES GMSL_CAM_3_NUM_LANES
 	#include "gmsl-serializer.dtsi"
 };
 #endif
@@ -374,162 +593,64 @@ camera_3_i2c_bus: &serializer_3_i2c_0 {};
 #endif
 
 #if defined(GMSL_CAMERA_0)
+&serializer_0 {
+#if defined(GMSL_CAM_0_PINS_INCLUDE)
+	#define SER_INDEX 0
+	#include GMSL_CAM_0_PINS_INCLUDE
+#endif
+};
+
 &camera_0_i2c_bus {
 	#define CAM_INDEX 0
-#if defined(GMSL_CAM_OX03A)
-	#include "gmsl-ox03a.dtsi"
-#else
-#error
-#endif
+	#define CAM_HEX_REG GMSL_CAM_0_DEFAULT_HEX_ADDR
+	#include GMSL_CAM_0_INCLUDE
 };
 #endif
 
 #if defined(GMSL_CAMERA_1)
+&serializer_1 {
+#if defined(GMSL_CAM_1_PINS_INCLUDE)
+	#define SER_INDEX 1
+	#include GMSL_CAM_1_PINS_INCLUDE
+#endif
+};
+
 &camera_1_i2c_bus {
 	#define CAM_INDEX 1
-#if defined(GMSL_CAM_OX03A)
-	#include "gmsl-ox03a.dtsi"
-#else
-#error
-#endif
+	#define CAM_HEX_REG GMSL_CAM_1_DEFAULT_HEX_ADDR
+	#include GMSL_CAM_0_INCLUDE
 };
 #endif
 
 #if defined(GMSL_CAMERA_2)
+&serializer_2 {
+#if defined(GMSL_CAM_2_PINS_INCLUDE)
+	#define SER_INDEX 2
+	#include GMSL_CAM_2_PINS_INCLUDE
+#endif
+};
+
 &camera_2_i2c_bus {
 	#define CAM_INDEX 2
-#if defined(GMSL_CAM_OX03A)
-	#include "gmsl-ox03a.dtsi"
-#else
-#error
-#endif
+	#define CAM_HEX_REG GMSL_CAM_2_DEFAULT_HEX_ADDR
+	#include GMSL_CAM_0_INCLUDE
 };
 #endif
 
 #if defined(GMSL_CAMERA_3)
+&serializer_3 {
+#if defined(GMSL_CAM_3_PINS_INCLUDE)
+	#define SER_INDEX 3
+	#include GMSL_CAM_3_PINS_INCLUDE
+#endif
+};
+
 &camera_3_i2c_bus {
 	#define CAM_INDEX 3
-#if defined(GMSL_CAM_OX03A)
-	#include "gmsl-ox03a.dtsi"
-#else
-#error
-#endif
+	#define CAM_HEX_REG GMSL_CAM_3_DEFAULT_HEX_ADDR
+	#include GMSL_CAM_0_INCLUDE
 };
 #endif
-
-/ {
-	tcp: tegra-camera-platform {
-		compatible = "nvidia, tegra-camera-platform";
-		/**
-		* Physical settings to calculate max ISO BW
-		*
-		* num_csi_lanes = <>;
-		* Total number of CSI lanes when all cameras are active
-		*
-		* max_lane_speed = <>;
-		* Max lane speed in Kbit/s
-		*
-		* min_bits_per_pixel = <>;
-		* Min bits per pixel
-		*
-		* vi_peak_byte_per_pixel = <>;
-		* Max byte per pixel for the VI ISO case
-		*
-		* vi_bw_margin_pct = <>;
-		* Vi bandwidth margin in percentage
-		*
-		* max_pixel_rate = <>;
-		* Max pixel rate in Kpixel/s for the ISP ISO case
-		*
-		* isp_peak_byte_per_pixel = <>;
-		* Max byte per pixel for the ISP ISO case
-		*
-		* isp_bw_margin_pct = <>;
-		* Isp bandwidth margin in percentage
-		*/
-		num_csi_lanes = <2>;
-		max_lane_speed = <4000000>;
-		min_bits_per_pixel = <10>;
-		vi_peak_byte_per_pixel = <2>;
-		vi_bw_margin_pct = <25>;
-		max_pixel_rate = <240000>;
-		isp_peak_byte_per_pixel = <5>;
-		isp_bw_margin_pct = <25>;
-
-		nv,proc-device-tree-paths =
-			"camera0",
-			"camera1",
-			"camera2",
-			"camera3";
-		nv,proc-device-tree-targets = <
-			&camera0
-			&camera1
-			&camera2
-			&camera3>;
-
-		/**
-		 * The general guideline for naming badge_info contains 3 parts, and is as follows,
-		 * The first part is the camera_board_id for the module; if the module is in a FFD
-		 * platform, then use the platform name for this part.
-		 * The second part contains the position of the module, ex. "rear" or "front".
-		 * The third part contains the last 6 characters of a part number which is found
-		 * in the module's specsheet from the vendor.
-		 */
-#if defined(GMSL_CAMERA_0)
-		modules {
-			module0 {
-				badge = "jakku_front_ox03a1";
-				position = "topleft";
-				orientation = "1";
-				drivernode0 {
-					pcl_id = "v4l2_sensor";
-					devname = "camera0";
-					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera0";
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_1)
-			module1 {
-				badge = "jakku_front_ox03a2";
-				position = "topright";
-				orientation = "1";
-				drivernode0 {
-					pcl_id = "v4l2_sensor";
-					devname = "camera1";
-					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera1";
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_2)
-			module2 {
-				badge = "jakku_front_ox03a3";
-				position = "bottomleft";
-				orientation = "1";
-				drivernode0 {
-					pcl_id = "v4l2_sensor";
-					devname = "camera2";
-					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera2";
-				};
-			};
-#endif
-
-#if defined(GMSL_CAMERA_3)
-			module3 {
-				badge = "jakku_front_ox03a4";
-				position = "bottomright";
-				orientation = "1";
-				drivernode0 {
-					pcl_id = "v4l2_sensor";
-					devname = "camera3";
-					proc-device-tree = "/proc/device-tree/tegra-camera-platform/camera3";
-				};
-			};
-#endif
-		};
-	};
-};
 
 #undef STRINGIFY
 #undef _STRINGIFY
