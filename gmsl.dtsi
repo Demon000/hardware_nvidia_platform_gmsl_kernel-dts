@@ -232,7 +232,6 @@ deserializer_i2c_bus: &cam_i2c {};
 		max,alt-mem-map12;
 	};
 
-
 #if defined(GMSL_CAMERA_0)
 	#define DESER_CH_INDEX 0
 	#include "gmsl-deserializer-channel.dtsi"
