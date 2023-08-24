@@ -1,6 +1,5 @@
 #ifdef DESER_CH_INDEX
 #define DESER_CH_REG DESER_CH_INDEX
-#define DESER_CH_VC_ID DESER_CH_INDEX
 #define DESER_CH_OUT_LABEL CONCAT(deser_out, DESER_CH_INDEX)
 #define DESER_CH_IN_LABEL CONCAT(deser_in, DESER_CH_INDEX)
 #define DESER_CH_OUT_REMOTE_LABEL CONCAT(csi_in, DESER_CH_INDEX)
@@ -8,10 +7,6 @@
 #endif
 
 #if !defined(DESER_CH_REG)
-#error
-#endif
-
-#if !defined(DESER_CH_VC_ID)
 #error
 #endif
 
@@ -62,7 +57,6 @@ channel@DESER_CH_REG {
 
 #undef DESER_CH_INDEX
 #undef DESER_CH_REG
-#undef DESER_CH_VC_ID
 #undef DESER_CH_OUT_LABEL
 #undef DESER_CH_IN_LABEL
 #undef DESER_CH_OUT_REMOTE_LABEL
