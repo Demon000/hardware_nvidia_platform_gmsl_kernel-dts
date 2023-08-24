@@ -87,6 +87,8 @@
 #define GMSL_CAM_2_HEX_ADDR	0x39
 #define GMSL_CAM_3_HEX_ADDR	0x3a
 
+#define GMSL_CAM_OX03A
+
 / {
 	tegra-capture-vi  {
 		num-channels = <GMSL_CAMERA_NUM>;
@@ -374,29 +376,45 @@ camera_3_i2c_bus: &serializer_3_i2c_0 {};
 
 #if defined(GMSL_CAMERA_0)
 &camera_0_i2c_bus {
-	#define OX03A_INDEX 0
+	#define CAM_INDEX 0
+#if defined(GMSL_CAM_OX03A)
 	#include "gmsl-ox03a.dtsi"
+#else
+#error
+#endif
 };
 #endif
 
 #if defined(GMSL_CAMERA_1)
 &camera_1_i2c_bus {
-	#define OX03A_INDEX 1
+	#define CAM_INDEX 1
+#if defined(GMSL_CAM_OX03A)
 	#include "gmsl-ox03a.dtsi"
+#else
+#error
+#endif
 };
 #endif
 
 #if defined(GMSL_CAMERA_2)
 &camera_2_i2c_bus {
-	#define OX03A_INDEX 2
+	#define CAM_INDEX 2
+#if defined(GMSL_CAM_OX03A)
 	#include "gmsl-ox03a.dtsi"
+#else
+#error
+#endif
 };
 #endif
 
 #if defined(GMSL_CAMERA_3)
 &camera_3_i2c_bus {
-	#define OX03A_INDEX 3
+	#define CAM_INDEX 3
+#if defined(GMSL_CAM_OX03A)
 	#include "gmsl-ox03a.dtsi"
+#else
+#error
+#endif
 };
 #endif
 

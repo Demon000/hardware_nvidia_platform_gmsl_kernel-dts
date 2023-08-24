@@ -1,63 +1,63 @@
 #include <dt-bindings/media/camera.h>
 
-#ifndef OX03A_HEX_REG
-#define OX03A_HEX_REG 0x36
+#ifndef CAM_HEX_REG
+#define CAM_HEX_REG 0x36
 #endif
 
-#ifdef OX03A_INDEX
-#define OX03A_VC_ID	OX03A_INDEX
-#define OX03A_SER_INDEX  OX03A_INDEX
-#define OX03A_SER_LABEL  CONCAT(serializer_, OX03A_SER_INDEX)
-#define OX03A_PWDN_LABEL CONCAT(OX03A_SER_LABEL, _mfp0_pwdn)
-#define OX03A_RCLK_LABEL CONCAT(OX03A_SER_LABEL, _mfp4_rclk)
-#define OX03A_OUT_LABEL CONCAT(ox03a_out, OX03A_INDEX)
-#define OX03A_IN_LABEL CONCAT(ser_in, OX03A_INDEX)
-#define OX03A_LABEL CONCAT(camera, OX03A_INDEX)
+#ifdef CAM_INDEX
+#define CAM_VC_ID		CAM_INDEX
+#define CAM_SER_INDEX		CAM_INDEX
+#define CAM_SER_LABEL		CONCAT(serializer_, CAM_SER_INDEX)
+#define CAM_PWDN_LABEL		CONCAT(CAM_SER_LABEL, _mfp0_pwdn)
+#define CAM_RCLK_LABEL		CONCAT(CAM_SER_LABEL, _mfp4_rclk)
+#define CAM_OUT_LABEL		CONCAT(cam_out, CAM_INDEX)
+#define CAM_IN_LABEL		CONCAT(ser_in, CAM_INDEX)
+#define CAM_LABEL		CONCAT(camera, CAM_INDEX)
 #endif
 
-#if !defined(OX03A_VC_ID)
+#if !defined(CAM_VC_ID)
 #error
 #endif
 
-#if !defined(OX03A_SER_LABEL)
+#if !defined(CAM_SER_LABEL)
 #error
 #endif
 
-#if !defined(OX03A_PWDN_LABEL)
+#if !defined(CAM_PWDN_LABEL)
 #error
 #endif
 
-#if !defined(OX03A_RCLK_LABEL)
+#if !defined(CAM_RCLK_LABEL)
 #error
 #endif
 
-#if !defined(OX03A_OUT_LABEL)
+#if !defined(CAM_OUT_LABEL)
 #error
 #endif
 
-#if !defined(OX03A_IN_LABEL)
+#if !defined(CAM_IN_LABEL)
 #error
 #endif
 
-#if !defined(OX03A_LABEL)
+#if !defined(CAM_LABEL)
 #error
 #endif
 
-// #define OX03A_USE_AD_GAIN
+// #define CAM_USE_AD_GAIN
 
-OX03A_LABEL: ox03a@OX03A_HEX_REG {
+CAM_LABEL: ox03a@CAM_HEX_REG {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
 	compatible = "nv,nv-cam";
-	reg = <OX03A_HEX_REG>;
+	reg = <CAM_HEX_REG>;
 
-	label = STRINGIFY(OX03A_LABEL);
+	label = STRINGIFY(CAM_LABEL);
 
-	pinctrl-0 = <&OX03A_PWDN_LABEL &OX03A_RCLK_LABEL>;
+	pinctrl-0 = <&CAM_PWDN_LABEL &CAM_RCLK_LABEL>;
 	pinctrl-names = "default";
 
-	pwdn-gpios = <&OX03A_SER_LABEL 0 GPIO_ACTIVE_HIGH>;
+	pwdn-gpios = <&CAM_SER_LABEL 0 GPIO_ACTIVE_HIGH>;
 
 	nv,skip-s-stream;
 	nv,skip-notifier;
@@ -533,7 +533,7 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 			0x3501 0x01
 			0x3502 0x90
 		>;
-#if defined(OX03A_USE_AD_GAIN)
+#if defined(CAM_USE_AD_GAIN)
 		nv,gain-type = "ad";
 
 		nv,again-min = <16>;
@@ -558,7 +558,7 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 		mclk_khz = "25000";
 		num_lanes = "2";
 		tegra_sinterface = GMSL_PORT_SERIAL;
-		vc_id = STRINGIFY(OX03A_VC_ID);
+		vc_id = STRINGIFY(CAM_VC_ID);
 		phy_mode = "DPHY";
 		discontinuous_clk = "no";
 		dpcm_enable = "false";
@@ -578,7 +578,7 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 		mclk_multiplier = "10";
 		pix_clk_hz = "250000000";
 
-#if defined(OX03A_USE_AD_GAIN)
+#if defined(CAM_USE_AD_GAIN)
 		gain_factor = "16384";
 		min_gain_val = "16384"; /* 1.00x */
 		max_gain_val = "4062984"; /* 247.984863281x ((16 - 8/16) * (16 - 1/1024)) */
@@ -616,23 +616,23 @@ OX03A_LABEL: ox03a@OX03A_HEX_REG {
 		port@0 {
 			reg = <0>;
 
-			OX03A_OUT_LABEL: endpoint {
+			CAM_OUT_LABEL: endpoint {
 				port-index = <GMSL_PORT>;
 				bus-width = <2>;
 				data-lanes = <1 2 3 4>;
-				remote-endpoint = <&OX03A_IN_LABEL>;
+				remote-endpoint = <&CAM_IN_LABEL>;
 			};
 		};
 	};
 };
 
-#undef OX03A_HEX_REG
-#undef OX03A_INDEX
-#undef Ox03A_SER_INDEX
-#undef OX03A_SER_LABEL
-#undef OX03A_VC_ID
-#undef OX03A_PWDN_LABEL
-#undef OX03A_RCLK_LABEL
-#undef OX03A_LABEL
-#undef OX03A_OUT_LABEL
-#undef OX03A_IN_LABEL
+#undef CAM_HEX_REG
+#undef CAM_INDEX
+#undef CAM_SER_INDEX
+#undef CAM_SER_LABEL
+#undef CAM_VC_ID
+#undef CAM_PWDN_LABEL
+#undef CAM_RCLK_LABEL
+#undef CAM_LABEL
+#undef CAM_OUT_LABEL
+#undef CAM_IN_LABEL
