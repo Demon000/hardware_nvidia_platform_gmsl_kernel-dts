@@ -58,6 +58,7 @@ CAM_LABEL: ox03a@CAM_HEX_REG {
 	pinctrl-names = "default";
 
 	pwdn-gpios = <&CAM_SER_LABEL 0 GPIO_ACTIVE_HIGH>;
+	nv,pwdn-sleep-us = <500000>;
 
 	nv,skip-s-stream;
 	nv,skip-notifier;
