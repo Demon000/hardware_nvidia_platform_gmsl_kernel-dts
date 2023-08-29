@@ -115,7 +115,7 @@ Configuration parameters:
 #endif
 
 #define GMSL_MAX96717_COMPAT "maxim,max96717"
-#define GMSL_MAX9295A_COMPAT "maxim,max9295a"
+#define GMSL_MAX9295A_COMPAT "maxim,max96717"
 #define GMSL_MAX96724_COMPAT "maxim,max96724"
 #define GMSL_MAX9296A_COMPAT "maxim,max9296a"
 #define GMSL_OX03A_INCLUDE "gmsl-ox03a.dtsi"
